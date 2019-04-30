@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>Caverns Of Time - World of Warcraft® Visualized Stories</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="css/favicon-32x32.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+      integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+      crossorigin=""></script>
+    
+    <script src="https://unpkg.com/moment@2.24.0/min/moment.min.js" 
+            integrity="sha384-fYxN7HsDOBRo1wT/NSZ0LkoNlcXvpDpFy6WzB42LxuKAX7sBwgo7vuins+E1HCaw" 
+            crossorigin=""></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    
+    <script src="js/rastercoords.js"></script>
+    <script src="js/rendering_tools.js"></script>
+    <script src="js/static.js"></script>
+    <script src="js/canvaslayer.js"></script>
+    <script src="js/buttoncontrol.js"></script>
+    <script src="js/slidercontrol.js"></script>
+    <script src="js/devtools.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/particle.js"></script>
+    <script src="js/rendering.js"></script>
+    <script src="js/particles_canvas.js"></script>
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+            background-color: #167C8B;
+        }
+    </style>
+
+</head>
+<body class="">
+<div id='map'>    
+<div/>
+<script>
+    var dataRefresherTask;
+    
+    var map = L.map('map', {
+        minZoom: 2,
+        maxZoom: 6
+    });
+   
+    map.attributionControl.setPrefix(res.map_prefix);
+    
+    var img = [
+      10260,
+      10260
+    ]
+
+    // assign map and image dimensions
+    var rc = new L.RasterCoords(map, img)
+    // set max zoom Level (might be `x` if gdal2tiles was called with `-z 0-x` option)
+    map.setMaxZoom(rc.zoomLevel())
+    // all coordinates need to be unprojected using the `unproject` method
+    // set the view in the lower right edge of the image
+    map.setView(rc.unproject([img[0], img[1]/2]), 2)
+    
+    var bounds = [rc.unproject([0, 0]), rc.unproject([img[0], img[1]])];
+    L.tileLayer('data/tiles/{z}/{x}/{y}.png', {
+      noWrap: true,
+      minZoom: 0,
+      maxZoom: 6,
+      zIndex: -4,
+      bounds: bounds
+    }).addTo(map)
+    map.setMaxBounds(bounds);
+    
+    var objectsToRender = {'particles': [], 'special_particles': [], 'dateInfo': null};
+    var particlesLayer = new particlesCanvasDraw(objectsToRender);
+    particlesLayer.addTo(map);
+    
+    var dataConsumer = function() {
+        var consumer = function(data) {
+            particlesLayer.setData(data[0], data[1]);
+        }
+        return data.queue.consume(consumer);
+    }
+    
+    var renderer = initRenderer(objectsToRender, dataConsumer);
+    
+    var slider = new sliderControl(function(speed){
+        updateSpeed(speed, this.updateSpeedTitle);
+    })
+    
+    function onButtonClickCallback(newStartDate, category, speed) {
+        function impl() {
+            clearTimeout(dataRefresherTask);
+            dataRefresherTask = null;
+            if(!category) category = 'default';
+            if(!speed) updateSpeed(1, slider.updateSpeedTitle);
+            else updateSpeed(speed, slider.updateSpeedTitle);
+
+            data.queue.clear();
+            particlesLayer.resetAllCache();
+
+            var filename = data.index.getFileNameByDate(category, newStartDate);
+            data.requestor.requestNewData(newStartDate, filename, scheduleDataRefresher, true);
+        }
+
+        return impl;
+    }
+    
+    
+    //add buttons and slider
+    for(var i in res.buttons) {
+        var b = res.buttons[i];
+        map.addControl(new buttonControl(b.title, b.description,  onButtonClickCallback(b.date, b.category, b.speed)));
+    }
+    map.addControl(slider);
+    
+    
+    //data refresher, needed for partial data load
+    function scheduleDataRefresher() {
+        dataRefresherTask = setTimeout(function() {
+            if(data.queue.size() < 30 && dataRefresherTask) {
+                var lastData = data.queue.getLastConsumed();
+                var lastDate = lastData[1]['date'];
+                var filename = data.index.getNextFileNameByDate(lastDate);
+                requestNewData(lastDate, filename, scheduleDataRefresher);    
+            } else {
+                scheduleDataRefresher();
+            }
+            
+        }, 1000);
+    }
+    
+    function bootstrapper(startDate, filename) {
+        data.requestor.requestNewData(startDate, filename, scheduleDataRefresher, true);
+    }
+    
+    //init speed
+    updateSpeed(1, slider.updateSpeedTitle);
+    //start renderer
+    renderer.start();
+    data.index.buildIndex(bootstrapper);
+    
+    //for labeling purposes
+    //registerLabelsCollector();
+</script>
+
+</body></html>

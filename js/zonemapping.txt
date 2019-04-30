@@ -1,0 +1,337 @@
+//var bounds = [L.latLng(-26.5, -25), L.latLng(1021.5, 1023)];    
+    //var image = L.imageOverlay('map.jpg', bounds).addTo(map);
+    //map.setMaxBounds(bounds);
+    //map.setView(L.latLng(70, 120), -1);
+
+{
+  "Darnassus": [
+    937.03,
+    34.75
+  ],
+  "Naxxramas": [
+    791.5,
+    913.25
+  ],
+  "Hyjal": [
+    708,
+    223
+  ],
+  "Tanaris": [
+    160.07,
+    264.5
+  ],
+  "Un'Goro Crater": [
+    205.5,
+    185.5
+  ],
+  "Silithus": [
+    168,
+    94.5
+  ],
+  "Zul'Farrak": [
+    186.5,
+    233
+  ],
+  "Thousand Needles": [
+    241,
+    217
+  ],
+  "Feralas": [
+    270,
+    108.5
+  ],
+  "Dire Maul": [
+    289.5,
+    82.5
+  ],
+  "Razorfen Kraul": [
+    291.5,
+    186
+  ],
+  "Thunder Bluff": [
+    430,
+    134.5
+  ],
+  "Onyxia's Lair": [
+    271,
+    269
+  ],
+  "The Barrens": [
+    460.5,
+    229
+  ],
+  "Desolace": [
+    410.5,
+    19
+  ],
+  "Stonetalon Mountains": [
+    539,
+    105
+  ],
+  "Felwood": [
+    696.5,
+    159
+  ],
+  "Orgrimmar": [
+    547,
+    290
+  ],
+  "Dustwallow Marsh": [
+    348.73,
+    236.75
+  ],
+  "Maraudon": [
+    414,
+    41.5
+  ],
+  "Darkshore": [
+    762,
+    119.5
+  ],
+  "Ashenvale": [
+    587.12,
+    224.75
+  ],
+  "Moonglade": [
+    842.5,
+    218
+  ],
+  "Winterspring": [
+    784,
+    299
+  ],
+  "Azshara": [
+    643.5,
+    337.5
+  ],
+  "Westfall": [
+    193,
+    739.5
+  ],
+  "Duskwood": [
+    185.5,
+    819.5
+  ],
+  "Redridge Mountains": [
+    249.5,
+    859
+  ],
+  "Burning Steppes": [
+    331.6,
+    889.7
+  ],
+  "Deadmines": [
+    161.5,
+    720.5
+  ],
+  "Blackrock Spire": [
+    325.3,
+    804.2
+  ],
+  "Blackrock Mountain": [
+    338.5,
+    816.2
+  ],
+  "Swamp of Sorrows": [
+    195.5,
+    892
+  ],
+  "Searing Gorge": [
+    380.5,
+    807
+  ],
+  "Blackrock Depths": [
+    324.5,
+    827
+  ],
+  "Zul'Gurub": [
+    128,
+    836.5
+  ],
+  "Stranglethorn Vale": [
+    80.04,
+    758.5
+  ],
+  "Blasted Lands": [
+    161,
+    884.5
+  ],
+  "Molten Core": [
+    322,
+    817.5
+  ],
+  "Deadwind Pass": [
+    189.5,
+    843.5
+  ],
+  "The Temple of Atal'Hakkar": [
+    193,
+    921
+  ],
+  "Blackwing Lair": [
+    318,
+    819.5
+  ],
+  "Karazhan": [
+    161.5,
+    844
+  ],
+  "Elwynn Forest": [
+    234.5,
+    776
+  ],
+  "Stormwind City": [
+    273,
+    751
+  ],
+  "Deeprun Tram": [
+    343,
+    754
+  ],
+  "Ironforge": [
+    449.5,
+    807.5
+  ],
+  "Dun Morogh": [
+    419,
+    792
+  ],
+  "Wetlands": [
+    520.5,
+    836
+  ],
+  "Gnomeregan": [
+    421,
+    754.5
+  ],
+  "Badlands": [
+    365.5,
+    862.7
+  ],
+  "Eastern Plaguelands": [
+    775.5,
+    944
+  ],
+  "Scholomance": [
+    722.5,
+    869
+  ],
+  "Arathi Highlands": [
+    624.23,
+    893.7
+  ],
+  "Western Plaguelands": [
+    741,
+    836
+  ],
+  "Undercity": [
+    738.5,
+    767
+  ],
+  "Stratholme": [
+    826.5,
+    897.5
+  ],
+  "Hillsbrad Foothills": [
+    664.06,
+    807.75
+  ],
+  "Scarlet Monastery": [
+    796,
+    804
+  ],
+  "Alterac Mountains": [
+    710.5,
+    794
+  ],
+  "Loch Modan": [
+    432,
+    881
+  ],
+  "Uldaman": [
+    393,
+    889
+  ],
+  "Durotar": [
+    494.2,
+    301.5
+  ],
+  "Mulgore": [
+    385.5,
+    152
+  ],
+  "Tirisfal Glades": [
+    768.5,
+    752
+  ],
+  "Silverpine Forest": [
+    687,
+    731
+  ],
+  "Ragefire Chasm": [
+    545.6,
+    306.3
+  ],
+  "Blackfathom Deeps": [
+    659.5,
+    97
+  ],
+  "The Hinterlands": [
+    657.5,
+    941.5
+  ],
+  "Wailing Caverns": [
+    444.5,
+    209
+  ],
+  "Shadowfang Keep": [
+    656.5,
+    719
+  ],
+  "Razorfen Downs": [
+    284,
+    212.5
+  ],
+  "The Great Sea": [
+    369,
+    526
+  ],
+  "GM Island": [
+    76.5,
+    515.5
+  ],
+  "Teldrassil": [
+    873,
+    97
+  ],
+  "Ruins of Ahn'Qiraj": [
+    45.4,
+    107.6
+  ],
+  "Gates of Ahn'Qiraj": [
+    114.3,
+    77
+  ],
+  "Ahn'Qiraj": [
+    59.3,
+    66
+  ],
+  "Arathi Basin": [
+    623.38,
+    908.87
+  ],
+  "Warsong Gulch": [
+    592.27,
+    258.75
+  ],
+  "Alterac Valley": [
+    686.98,
+    811.93
+  ]
+};
+
+for(var key in res.zones_latlng) {
+    res.zones_latlng[key][0] = res.zones_latlng[key][0]/4.3 - 24.91;
+    res.zones_latlng[key][1] = res.zones_latlng[key][1]/6.11 - 132.5; 
+}
+
