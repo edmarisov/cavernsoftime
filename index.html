@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html><head>   
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
     <title>Caverns Of Time - World of Warcraft® Visualized Stories</title>
@@ -120,14 +120,12 @@
         return impl;
     }
     
-    
     //add buttons and slider
     for(var i in res.buttons) {
         var b = res.buttons[i];
         map.addControl(new buttonControl(b.title, b.description,  onButtonClickCallback(b.date, b.category, b.speed)));
     }
     map.addControl(slider);
-    
     
     //data refresher, needed for partial data load
     function scheduleDataRefresher() {
